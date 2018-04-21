@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Đấu giá</title>
+    <link rel="stylesheet" href="../assets/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css">
+    <link rel="stylesheet" href="../assets/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <ul class="nav nav-pills nav-justified">
+                <li>
+                    <h1>
+                        <a style="text-decoration: none; color:black" href="home">
+                            <i class="fa fa-gavel fa-lg" aria-hidden="true"></i> Đấu giá<small> Online</small>
+                        </a>
+                    </h1>
+                </li>
+                <li role="presentation">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="giohang"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Giỏ hàng</a></li>
+                        <li><a href="daugiacuatoi"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Đấu giá của tôi</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                 User 
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="canhan"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Cá nhân</a></li>
+                                <li><a href="lichsumua"><i class="fa fa-history fa-lg" aria-hidden="true"></i> Lịch sử mua</a></li>
+                                <!-- Admin -->
+                                <li><a href="quanlysanpham-them"><i class="fa fa-database fa-lg" aria-hidden="true"></i> Quản lý sản phẩm</a></li>
+                                <!-- Admin -->
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="menu row">
+            <div class="col-xs-12 col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
+                <ul class="nav nav-tabs nav-justified">                
+                    <li role="presentation"><a href="#"><i class="fa fa-laptop fa-lg" aria-hidden="true"></i> LAPTOP</a></li>
+                    <li role="presentation"><a href="#"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i> ĐIỆN THOẠI</a></li>
+                    <li role="presentation"><a href="#"><i class="fa fa-camera-retro fa-lg" aria-hidden="true"></i> MÁY ẢNH</a></li>
+                    <li role="presentation"><a href="#"><i class="fa fa-headphones fa-lg" aria-hidden="true"></i> TAI NGHE</a></li>
+                    <li role="presentation"><a href="#"><i class="fa fa-reorder fa-lg" aria-hidden="true"></i> KHÁC</a></li>
+                </ul>
+            </div>    
+        </div>        
+        <div class="main">
+            <br>
+            <div>
+                <div class="panel-body row">
+                    <div class="col-sm-12 col-md-12 col-xs-12">
+                        <a href="home"> < Đấu giá sản phẩm khác</a>
+                    </div>
+                </div>
+                <div class="panel-body row">
+                    <div class="col-sm-7 col-md-8 col-xs-12">
+                        <table class="table">
+                            <tr>
+                                <th>Sản phẩm</th>
+                                <th>Tên</th>
+                                <th>Số lượng</th>
+                                <th>Giá</th>
+                            </tr>
+                            <tr>
+                                <td><img src="../images/product.jpg" alt="" width="75"></td>
+                                <td>Face face</td>
+                                <td>10</td>
+                                <td>2000</td>
+                            </tr>
+                            <tr>
+                                <td><img src="../images/product.jpg" alt="" width="75"></td>
+                                <td>Face</td>
+                                <td>10</td>
+                                <td>2000</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="panel panel-default col-sm-5 col-md-4 col-xs-12">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <th><center><h4>Thành tiền</h4></center></th>
+                                    <th><center><h4 class="thanhtien-giohang">200.000đ</h4></center></th>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <br>
+                                        <center><button type="button" class="btn btn-danger btn-dathang-giohang">Đặt hàng</button></center>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </div>
+        <!-- <div class="footer">
+            <p>Footer</p>
+        </div> -->
+    </div>
+
+    <!-- Scripts bootrap và css-->
+    <script src="../assets/jquery-3.1.1.min.js"></script>
+    <script src="../assets/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="../assets/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="../assets/tinymce/tinymce.min.js" ></script>
+    <script src="../assets/script.js"></script>
+</body>
+</html>

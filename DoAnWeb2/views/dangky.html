@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Đăng ký</title>
+    <link rel="stylesheet" href="../assets/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css">
+    <link rel="stylesheet" href="../assets/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>
+                <a style="text-decoration: none; color:black" href="/">
+                    <i class="fa fa-gavel fa-lg" aria-hidden="true"></i> Đấu giá<small> Online</small>
+                </a>
+            </h1>            
+        </div>
+        <div class="main">
+            <div id="loginbox" style="margin-top:10px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+                <div class="panel panel-default" >
+                    <div class="panel-heading">
+                        <div class="panel-title">Đăng Ký</div>
+                        <div style="float:right; font-size: 90%; position: relative; top:-10px"><a href="/">Đăng Nhập</a></div>
+                    </div>     
+                    <div style="padding-top:30px" class="panel-body" >
+
+                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                            
+                        <form id="loginform" class="form-horizontal" role="form">
+                            <div class="form-group">
+                                    <label for="taikhoan" class="col-md-3 control-label">Tài khoản</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="taikhoan" placeholder="Tài khoản">
+                                    </div>
+                                </div>
+                                    
+                                <div class="form-group">
+                                    <label for="matkhau" class="col-md-3 control-label">Mật khẩu</label>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control" name="matkhau" placeholder="Mật khẩu">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="matkhau2" class="col-md-3 control-label">Nhập lại mật khẩu</label>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control" name="matkhau2" placeholder="Nhập lại mật khẩu">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="col-md-3 control-label">Email</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="email" placeholder="Email">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="diachi" class="col-md-3 control-label">Địa chỉ</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="diachi" placeholder="Địa chỉ">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="hoten" class="col-md-3 control-label">Họ tên</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="hoten" placeholder="Họ tên">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sdt" class="col-md-3 control-label">Điện thoại</label>
+                                    <div class="col-md-9">
+                                        <input type="number" class="form-control" name="sdt" placeholder="Điện thoại">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <!-- Button -->                                        
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button id="btn-signup" type="button" class="btn btn-success"><i class="icon-hand-right"></i>Đăng Ký</button>
+                                            
+                                    </div>
+                                </div>
+                                     
+                        </form>  
+                    </div>                     
+                </div>  
+            </div>  
+        </div>
+    </div>    
+    <!-- Scripts bootrap và css-->
+    <script src="../assets/jquery-3.1.1.min.js"></script>
+    <script src="../assets/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="../assets/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="../assets/script.js"></script>
+</body>
+</html>
