@@ -44,9 +44,39 @@ router.get('/daugiacuatoi', (req, res)=>{
 
 router.get('/canhan', (req, res)=>{
     if (req.session.tentaikhoan) {
-        res.send( {daugiacuatoi: 'daylacanhan'} )
+        res.send( {canhan: 'daylacanhan'} )
         res.end()
     }
 })
 
+router.get('/lichsumua', (req, res)=>{
+    if (req.session.tentaikhoan) {
+        let mang1 = [
+            {
+                id: '1',
+                name: 'mot'
+            }
+        ]
+        let mang2 = [
+            {
+                id: '1',
+                name: 'mot'
+            },
+            {
+                id: '2',
+                name: 'hai'
+            }
+        ]
+        res.send( {lichsumua1: mang1, lichsumua2: mang2} )
+        res.end()
+    }
+})
+
+router.get('/logout', (req, res)=>{
+    if (req.session.tentaikhoan) {
+        req.session.destroy()
+        res.send( {url: '/'} )
+        res.end()
+    }
+})
 module.exports = router

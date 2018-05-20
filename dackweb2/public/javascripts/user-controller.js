@@ -2,6 +2,7 @@ $(document).ready((e)=>{
 
     $('.content-giohang').hide()
     $('.content-daugiacuatoi').hide()
+    $('.content-canhan').hide()
     $('.content-lichsumua').hide()
 
     let div = $('.content-trangchu')
@@ -37,6 +38,7 @@ $('.logo').click((e)=>{
     $('.content-daugiacuatoi').hide()
     $('.content-lichsumua').hide()
     $('.content-giohang').hide()
+    $('.content-canhan').hide()
     $('.content-trangchu').show()
 })
 
@@ -45,6 +47,7 @@ $('.btngiohang').click((e)=>{
 
     $('.content-daugiacuatoi').hide()
     $('.content-lichsumua').hide()
+    $('.content-canhan').hide()
     $('.content-trangchu').hide()
     $('.content-giohang').show()
 
@@ -118,6 +121,7 @@ $('.btngiohang').click((e)=>{
         $('.content-daugiacuatoi').hide()
         $('.content-lichsumua').hide()
         $('.content-giohang').hide()
+        $('.content-canhan').hide()
         $('.content-trangchu').show()
     })
 })
@@ -127,6 +131,7 @@ $('.btndaugiacuatoi').click((e)=>{
 
     $('.content-lichsumua').hide()
     $('.content-trangchu').hide()
+    $('.content-canhan').hide()
     $('.content-giohang').hide()
     $('.content-daugiacuatoi').show()
 
@@ -186,8 +191,139 @@ $('.btndaugiacuatoi').click((e)=>{
 
         $('.content-daugiacuatoi').hide()
         $('.content-lichsumua').hide()
+        $('.content-canhan').hide()
         $('.content-giohang').hide()
         $('.content-trangchu').show()
     })
 })
 
+$('.btncanhan').click((e)=>{
+    e.preventDefault()
+
+    $('.content-daugiacuatoi').hide()
+    $('.content-lichsumua').hide()
+    $('.content-giohang').hide()
+    $('.content-trangchu').hide()
+    $('.content-canhan').show()
+
+    let div = $('.content-canhan')
+        div.html('')
+
+    $.ajax({
+        method: 'GET',
+        url: 'user/canhan',
+        contentType: 'application/json',
+        success: ((rs)=>{
+            div.append(`
+                <div class="col-md-6 col-sm-8 col-xs-8 col-md-offset-3 col-xs-offset-2 col-sm-offset-2">
+                    <form action="" method="">
+                        <p>
+                            <h3><center>Thông tin cá nhân</center></h3>
+                        </p>
+                        <br>
+                        <div class="input-group">
+                            <input type="text" class="form-control tenhienthi" placeholder="vd: nlcthong">
+                            <span class="input-group-addon">Tên hiển thị</span>
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <input type="password" class="form-control matkhau" placeholder="********">
+                            <span class="input-group-addon">Mật khẩu</span>
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="vd: 156/4 Tô hiến thành">
+                            <span class="input-group-addon">Địa chỉ</span>
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="vd: nlcthong1997@gmail.com">
+                            <span class="input-group-addon">Email</span>
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <input type="number" class="form-control" placeholder="vd: 01693438271">
+                            <span class="input-group-addon">Di động</span>
+                        </div>
+                        <br>
+                        <center><button type="button" class="btn btn-success btn-chinhsua-canhan">Chỉnh sửa</button></center>
+                    </form>
+                </div> 
+            `)
+        })
+    })
+})
+
+$('.btnlichsumua').click((e)=>{
+    e.preventDefault()
+
+    $('.content-daugiacuatoi').hide()
+    $('.content-giohang').hide()
+    $('.content-trangchu').hide()
+    $('.content-canhan').hide()
+    $('.content-lichsumua').show()
+
+    let div = $('.content-lichsumua')
+        div.html('')
+
+        div.append(`
+            <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-2 col-sm-offset-2">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Mã hóa đơn</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Giá</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbodylichsumua"></tbody>
+                </table>
+            </div>
+        `)
+    
+    let tbodylichsumua = $('.tbodylichsumua')
+        tbodylichsumua.html()
+
+    $.ajax({
+        method: 'GET',
+        url: '/user/lichsumua',
+        contentType: 'application/json',
+        success: ((rs)=>{
+            rs.lichsumua1.forEach((a) => {
+                tbodylichsumua.append(`
+                <tr>
+                    <td><b class="mahoadon-lichsumua">Hóa đơn: 01</b></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                `)
+                rs.lichsumua2.forEach((b) => { 
+                    tbodylichsumua.append(`
+                        <tr>
+                            <td></td>
+                            <td>Face ID</td>
+                            <td>6</td>
+                            <td>5000</td>
+                            <td>30000</td>
+                        </tr>
+                    `)
+                })
+            })
+        })
+    })
+})
+
+$('.btndangxuat').click((e)=>{
+    $.ajax({
+        method: 'GET',
+        url: '/user/logout',
+        contentType: 'application/json',
+        success: ((rs)=>{
+            window.location = rs.url
+        })
+    })
+})
