@@ -1,0 +1,29 @@
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #272822;
+    color: white;
+    text-align: center;
+ }
+.image-product {
+    border: none;
+}
+.btn-dathang-giohang,.btn-daugia-chitietdaugia,.btn-chinhsua-canhan {
+    width: 150px;
+}
+.price-now-home,.thanhtien-giohang,.pricenow-chitietdaugia,.mahoadon-lichsumua {
+    color: red;
+}
+.countdown-time-home,.countdown-time-chitietdaugia {
+    color: green;
+}
+.winner-chitietdaugia {
+    color: gold;
+}
+#btn-login,#btn-signup {
+    margin-left: 50%;
+    width: 40%;
+}
