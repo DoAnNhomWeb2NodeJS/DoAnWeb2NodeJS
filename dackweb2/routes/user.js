@@ -35,4 +35,18 @@ router.get('/giohang', (req, res)=>{
     }
 })
 
+router.get('/daugiacuatoi', (req, res)=>{
+    if (req.session.tentaikhoan) {
+        res.send( {daugiacuatoi: 'dayladaugiacuatoi'} )
+        res.end()
+    }
+})
+
+router.get('/canhan', (req, res)=>{
+    if (req.session.tentaikhoan) {
+        res.send( {daugiacuatoi: 'daylacanhan'} )
+        res.end()
+    }
+})
+
 module.exports = router
