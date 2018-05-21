@@ -1,16 +1,8 @@
 var express = require('express')
 var path = require('path')
-var pg = require('pg')
 var router = express.Router()
+var performQuery = require('../public/javascripts/db')
 
-var config = {
-    user: 'postgres',
-    database: 'web2',
-    password: 'chithong',
-    host: 'localhost',
-    port: 5432
-}
-var pool = new pg.Pool(config)
 
 router.get('/', (req, res)=>{
     if (req.session.tentaikhoan) {
