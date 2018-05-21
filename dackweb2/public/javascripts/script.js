@@ -1,12 +1,14 @@
-$('#chon-giadau').TouchSpin({
-    min: 0,
-    max: 1000000000,
-    initval: 0,
-    stepinterval: 50,
-    maxboostedstep: 10000000,
-    // prefix: 'đ',
-    postfix: 'đ'
-});
+$(function () {
+    $('#chongiadau').TouchSpin({
+        min: 0,
+        max: 1000000000,
+        initval: 0,
+        stepinterval: 50,
+        maxboostedstep: 10000000,
+        // prefix: 'đ',
+        postfix: 'đ'
+    })
+})
 
 // thanh toolbar trong input nhập chi tiết
 tinymce.init({

@@ -72,6 +72,13 @@ router.get('/lichsumua', (req, res)=>{
     }
 })
 
+router.get('/chitietdaugia', (req, res)=>{
+    if (req.session.tentaikhoan) {
+        res.send( {chitiet: '1'} )
+        res.end()
+    }
+})
+
 router.get('/logout', (req, res)=>{
     if (req.session.tentaikhoan) {
         req.session.destroy()

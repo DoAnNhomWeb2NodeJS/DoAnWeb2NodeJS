@@ -1,9 +1,11 @@
+//load sản phẩm khi vào trang chính
 $(document).ready((e)=>{
 
     $('.content-giohang').hide()
     $('.content-daugiacuatoi').hide()
     $('.content-canhan').hide()
     $('.content-lichsumua').hide()
+    $('.content-chitietdaugia').hide()
 
     let div = $('.content-trangchu')
         div.html('')
@@ -13,41 +15,136 @@ $(document).ready((e)=>{
         contentType: 'application/json',
         success: ((rs)=>{
             $('.tenhienthi').text(rs.tenhienthi)
-            div.append('\
-                    <div class="col-sm-4 col-md-2">\
-                        <div class="thumbnail">\
-                            <a href="chitietdaugia">\
-                                <img src="" alt="product">\
-                            </a>\
-                            <div class="caption">\
-                                <center>\
-                                    <p><b class="countdown-time-home">00:00:00</b></p>\
-                                    <p><b class="price-now-home">20.000 đ</b></p>\
-                                    <p><a href="chitietdaugia" class="btn btn-danger" role="button">Đấu giá ngay</a></p>\
-                                </center>\
-                            </div>\
-                        </div>\
-                    </div>\
-                ') 
+            div.append(`
+                <div class="col-sm-4 col-md-2">
+                    <div class="thumbnail">
+                        <a class="btnchitietdaugia" href="">
+                            <img src="../images/ytb.jpg" alt="product">
+                        </a>
+                        <div class="caption">
+                            <center>
+                                <p><b class="countdown-time-home">00:00:00</b></p>
+                                <p><b class="price-now-home">20.000 đ</b></p>
+                                <p><a href="" class="btn btn-danger btnchitietdaugia" role="button">Đấu giá ngay</a></p>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            `)
+            //page chi tiết đấu giá
+            $('.btnchitietdaugia').click((e)=>{
+                e.preventDefault()
+        
+                $('.content-giohang').hide()
+                $('.content-daugiacuatoi').hide()
+                $('.content-canhan').hide()
+                $('.content-lichsumua').hide()
+                $('.content-trangchu').hide()
+                $('.content-chitietdaugia').show()
+        
+                let divchitiet = $('.content-chitietdaugia')
+                    divchitiet.html('')
+
+                    divchitiet.append(`
+                        <div class="thumbnail col-md-4 col-sm-6 col-xs-12 image-product">
+                            <img src="../images/product.jpg" alt="" width="350">
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12 information-product">
+                            <p>
+                                <center><h4 class="tensanpham"></h4></center>
+                                <br>
+                                <div class="dacta"></div>
+                            </p>
+                            <div class="alert alert-danger notification-product" role="alert">
+                                <a href="#" class="alert-link">...Thông báo</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12 col-xs-12 by-product">
+                            <p><center>Người thắng hiện tại</center></p>
+                            <p><center><i class="fa fa-trophy fa-lg winner-chitietdaugia" aria-hidden="true"></i> <b class="winner-chitietdaugia">Chí Thông</b></center></p>
+                            <hr>
+                            <div class="row">
+                                <div class="col-xs-6 col-md-6 col-sm-6">
+                                    <div>
+                                        <center>
+                                            Kết thúc trong:
+                                            <p class="countdown-time-chitietdaugia">00:00:00</p>
+                                        </center>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-6 col-sm-6">
+                                    <div>
+                                        <center>
+                                            Giá hiện tại
+                                            <p class="pricenow-chitietdaugia">20.000.000 đ</p>
+                                        </center>    
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row choose-price">
+                                <div class="col-xs-12  col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
+                                    <center>
+                                        <p>
+                                            Đấu giá ngay:
+                                        </p>
+                                        <input id="chongiadau" type="number" value="" name="chongiadau">
+                                    </center>
+                                </div>
+                            </div>
+                            <br>
+                            <center>
+                                <button type="button" class="btn btn-danger btn-daugia-chitietdaugia">Đấu giá</button>
+                            </center>
+                        </div>
+                    `)
+                    $(()=>{
+                        $('#chongiadau').TouchSpin({
+                            min: 0,
+                            max: 1000000000,
+                            initval: 0,
+                            stepinterval: 50,
+                            maxboostedstep: 10000000,
+                            // prefix: 'đ',
+                            postfix: 'đ'
+                        })
+                    })
+                    
+
+                $.ajax({
+                    method: 'GET',
+                    url: '/user/chitietdaugia', // + rs.masanpham
+                    contentType: 'application/json',
+                    success: ((rs1)=>{
+                        $('.tensanpham').text(rs1.chitiet)
+                        $('.dacta').text(rs1.chitiet)
+                    })
+                })
+            })
         })
     })
 })
 
+    
+
+//tới trang chính khí click logo
 $('.logo').click((e)=>{
     e.preventDefault()
     $('.content-daugiacuatoi').hide()
     $('.content-lichsumua').hide()
     $('.content-giohang').hide()
+    $('.content-chitietdaugia').hide()
     $('.content-canhan').hide()
     $('.content-trangchu').show()
 })
-
+//page giỏ hàng
 $('.btngiohang').click((e)=>{
     e.preventDefault()
 
     $('.content-daugiacuatoi').hide()
     $('.content-lichsumua').hide()
     $('.content-canhan').hide()
+    $('.content-chitietdaugia').hide()
     $('.content-trangchu').hide()
     $('.content-giohang').show()
 
@@ -114,24 +211,26 @@ $('.btngiohang').click((e)=>{
             // })
         })
     })
-
+    //quay về trang chính từ trang giỏ hàng
     $('.linkdautiep').click((e)=>{
         e.preventDefault()
 
         $('.content-daugiacuatoi').hide()
         $('.content-lichsumua').hide()
         $('.content-giohang').hide()
+        $('.content-chitietdaugia').hide()
         $('.content-canhan').hide()
         $('.content-trangchu').show()
     })
 })
-
+//page đấu giá của tôi
 $('.btndaugiacuatoi').click((e)=>{
     e.preventDefault()
 
     $('.content-lichsumua').hide()
     $('.content-trangchu').hide()
     $('.content-canhan').hide()
+    $('.content-chitietdaugia').hide()
     $('.content-giohang').hide()
     $('.content-daugiacuatoi').show()
 
@@ -185,24 +284,26 @@ $('.btndaugiacuatoi').click((e)=>{
             // })
         })
     })
-
+    //quay về trang chính từ trang đấu giá của tôi
     $('.linkdautiep').click((e)=>{
         e.preventDefault()
 
         $('.content-daugiacuatoi').hide()
         $('.content-lichsumua').hide()
         $('.content-canhan').hide()
+        $('.content-chitietdaugia').hide()
         $('.content-giohang').hide()
         $('.content-trangchu').show()
     })
 })
-
+//page cá nhân
 $('.btncanhan').click((e)=>{
     e.preventDefault()
 
     $('.content-daugiacuatoi').hide()
     $('.content-lichsumua').hide()
     $('.content-giohang').hide()
+    $('.content-chitietdaugia').hide()
     $('.content-trangchu').hide()
     $('.content-canhan').show()
 
@@ -253,13 +354,14 @@ $('.btncanhan').click((e)=>{
         })
     })
 })
-
+//page lịch sử mua
 $('.btnlichsumua').click((e)=>{
     e.preventDefault()
 
     $('.content-daugiacuatoi').hide()
     $('.content-giohang').hide()
     $('.content-trangchu').hide()
+    $('.content-chitietdaugia').hide()
     $('.content-canhan').hide()
     $('.content-lichsumua').show()
 
