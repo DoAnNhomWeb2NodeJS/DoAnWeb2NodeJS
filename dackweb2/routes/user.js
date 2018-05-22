@@ -1,5 +1,6 @@
 var express = require('express')
 var path = require('path')
+var bodyParser = require('body-parser')
 var router = express.Router()
 var performQuery = require('../public/javascripts/db')
 
@@ -15,8 +16,16 @@ router.get('/', (req, res)=>{
 
 router.post('/', (req, res)=>{
     if (req.session.tentaikhoan) {
-        res.send( {tenhienthi: req.session.tenhienthi} )
-        res.end()
+        let query = 'SELECT * FROM taikhoan WHERE mataikhoan=$1'
+        let values = [req.session.mataikhoan]
+        performQuery(query, values, (results)=>{
+            let ten
+            results.rows.forEach( e => {
+                ten = e.tenhienthi
+            })
+            res.send( {tenhienthi: ten} )
+            res.end()
+        })
     }
 })
 
@@ -36,8 +45,32 @@ router.get('/daugiacuatoi', (req, res)=>{
 
 router.get('/canhan', (req, res)=>{
     if (req.session.tentaikhoan) {
-        res.send( {canhan: 'daylacanhan'} )
-        res.end()
+        let query = 'SELECT * FROM taikhoan WHERE mataikhoan=$1'
+        let values = [req.session.mataikhoan]
+        performQuery(query, values, (results)=>{
+            res.send( {data: results.rows} )
+            res.end()
+        })
+    }
+})
+
+router.put('/canhan', (req, res)=>{
+    if (req.session.tentaikhoan) {
+        let query = 'UPDATE taikhoan SET tenhienthi=$1, matkhau=$2, diachi=$3, email=$4, dienthoai=$5 WHERE mataikhoan=$6'
+        let values = [req.body.Tenhienthi, req.body.Matkhau, req.body.Diachi, req.body.Email, req.body.Dienthoai, req.session.mataikhoan]
+        performQuery(query, values, (results)=>{
+            if(results !== null){
+                let query1 = 'SELECT * FROM taikhoan WHERE mataikhoan=$1'
+                let values1 = [req.session.mataikhoan]
+                performQuery(query1, values1, (results1)=>{
+                    res.send( {update: true, dataU: results1.rows} )
+                    res.end()
+                })
+            } else {
+                res.send( {update: false} )
+                res.end()
+            }
+        })
     }
 })
 

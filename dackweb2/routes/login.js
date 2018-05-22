@@ -22,6 +22,7 @@ router.post('/', (req, res)=>{
         let userDB, passwordDB, tenhienthiDB, diachiDB, emailDB, dienthoaiDB, maloaitaikhoanDB
         
         results.rows.forEach(e => {
+            mataikhoanDB = e.mataikhoan
             userDB = e.tentaikhoan
             passwordDB = e.matkhau
             tenhienthiDB = e.tenhienthi
@@ -32,8 +33,10 @@ router.post('/', (req, res)=>{
         })
         
         if (username == userDB && password == passwordDB) {
+            req.session.mataikhoan = mataikhoanDB
             req.session.tentaikhoan = userDB
-            req.session.dienthoai = passwordDB
+            req.session.matkhau = passwordDB
+            req.session.dienthoai = dienthoaiDB
             req.session.email = emailDB
             req.session.diachi = diachiDB
             req.session.tenhienthi = tenhienthiDB

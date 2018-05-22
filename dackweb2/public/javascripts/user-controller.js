@@ -315,42 +315,77 @@ $('.btncanhan').click((e)=>{
         url: 'user/canhan',
         contentType: 'application/json',
         success: ((rs)=>{
-            div.append(`
-                <div class="col-md-6 col-sm-8 col-xs-8 col-md-offset-3 col-xs-offset-2 col-sm-offset-2">
-                    <form action="" method="">
-                        <p>
-                            <h3><center>Thông tin cá nhân</center></h3>
-                        </p>
-                        <br>
-                        <div class="input-group">
-                            <input type="text" class="form-control tenhienthi" placeholder="vd: nlcthong">
-                            <span class="input-group-addon">Tên hiển thị</span>
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <input type="password" class="form-control matkhau" placeholder="********">
-                            <span class="input-group-addon">Mật khẩu</span>
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="vd: 156/4 Tô hiến thành">
-                            <span class="input-group-addon">Địa chỉ</span>
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="vd: nlcthong1997@gmail.com">
-                            <span class="input-group-addon">Email</span>
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <input type="number" class="form-control" placeholder="vd: 01693438271">
-                            <span class="input-group-addon">Di động</span>
-                        </div>
-                        <br>
-                        <center><button type="button" class="btn btn-success btn-chinhsua-canhan">Chỉnh sửa</button></center>
-                    </form>
-                </div> 
-            `)
+            rs.data.forEach((a)=>{
+                div.append(`
+                    <div class="col-md-6 col-sm-8 col-xs-8 col-md-offset-3 col-xs-offset-2 col-sm-offset-2">
+                        <form class="canhan">
+                            <p>
+                                <h3><center>Thông tin cá nhân</center></h3>
+                            </p>
+                            <br>
+                            <div class="input-group">
+                                <input type="text" class="form-control tenhienthi" value="${a['tenhienthi']}">
+                                <span class="input-group-addon">Tên hiển thị</span>
+                            </div>
+                            <br>
+                            <div class="input-group">
+                                <input type="password" class="form-control matkhau" value="${a['matkhau']}">
+                                <span class="input-group-addon">Mật khẩu</span>
+                            </div>
+                            <br>
+                            <div class="input-group">
+                                <input type="text" class="form-control diachi" value="${a['diachi']}">
+                                <span class="input-group-addon">Địa chỉ</span>
+                            </div>
+                            <br>
+                            <div class="input-group">
+                                <input type="text" class="form-control email" value="${a['email']}">
+                                <span class="input-group-addon">Email</span>
+                            </div>
+                            <br>
+                            <div class="input-group">
+                                <input type="number" class="form-control dienthoai" value="${a['dienthoai']}">
+                                <span class="input-group-addon">Di động</span>
+                            </div>
+                            <br>
+                            <center><button type="button" class="btn btn-success btnchinhsuacanhan">Chỉnh sửa</button></center>
+                        </form>
+                    </div> 
+                `)
+            })
+            $('.btnchinhsuacanhan').click((e)=>{
+                e.preventDefault()
+
+                let row = $(e.target).parent().parent()
+
+                let tenhienthiP = row.find('.tenhienthi').val()
+                let matkhauP = row.find('.matkhau').val()
+                let diachiP = row.find('.diachi').val()
+                let emailP = row.find('.email').val()
+                let dienthoaiP = row.find('.dienthoai').val()
+        
+                data = {
+                    Tenhienthi: tenhienthiP,
+                    Matkhau: matkhauP,
+                    Diachi: diachiP,
+                    Email: emailP,
+                    Dienthoai: dienthoaiP
+                }
+        
+                $.ajax({
+                    method: 'PUT',
+                    url: '/user/canhan',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: ((rs)=>{
+                        if(rs.update == true){
+                            alert('Cập nhật thành công')
+                        } else {
+                            alert('Cập nhật lỗi')
+                        }
+                    })
+                })
+            })
         })
     })
 })
