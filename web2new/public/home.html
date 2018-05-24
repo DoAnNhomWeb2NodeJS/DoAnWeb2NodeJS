@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Đấu giá</title>
+    <link rel="stylesheet" href="/javascripts/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="javascripts/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css">
+    <link rel="stylesheet" href="/javascripts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/site.css">
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <ul class="nav nav-pills nav-justified">
+                <li class="logo">
+                    <h1>
+                        <a style="text-decoration: none; color:black" href="">
+                            <i class="fa fa-gavel fa-lg" aria-hidden="true"></i> Đấu giá<small> Online</small>
+                        </a>
+                    </h1>
+                </li>
+                <li role="presentation">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="btngiohang"><a href=""><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Giỏ hàng</a></li>
+                        <li class="btndaugiacuatoi"><a href=""><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Đấu giá của tôi</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                 <span class="tenhienthi"></span> 
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="btncanhan"><a href=""><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Cá nhân</a></li>
+                                <li class="btnlichsumua"><a href=""><i class="fa fa-history fa-lg" aria-hidden="true"></i> Lịch sử mua</a></li>
+                                <!-- Admin -->
+                                <li class="btnquanlysanpham"></li>
+                                <!-- <li><a href=""><i class="fa fa-database fa-lg" aria-hidden="true"></i> Quản lý sản phẩm</a></li> -->
+                                <!-- Admin -->
+                                <li role="separator" class="divider"></li>
+                                <li class="btndangxuat"><a href=""><span class="glyphicon glyphicon-log-out btnlogout" aria-hidden="true"></span> Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="menu row">
+            <div class="col-xs-12 col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
+                <ul class="nav nav-tabs nav-justified">                
+                    <li role="presentation"><a href="#"><i class="fa fa-laptop fa-lg" aria-hidden="true"></i> LAPTOP</a></li>
+                    <li role="presentation"><a href="#"><i class="fa fa-mobile fa-lg" aria-hidden="true"></i> ĐIỆN THOẠI</a></li>
+                    <li role="presentation"><a href="#"><i class="fa fa-camera-retro fa-lg" aria-hidden="true"></i> MÁY ẢNH</a></li>
+                    <li role="presentation"><a href="#"><i class="fa fa-headphones fa-lg" aria-hidden="true"></i> TAI NGHE</a></li>
+                    <li role="presentation"><a href="#"><i class="fa fa-reorder fa-lg" aria-hidden="true"></i> KHÁC</a></li>
+                </ul>
+            </div>    
+        </div>        
+        <div class="main">
+            <br>
+            <div class="panel panel-default">
+                <div class="panel-body row content-trangchu"></div>
+                <div class="panel-body row content-giohang"></div>
+                <div class="panel-body row content-daugiacuatoi"></div>
+                <div class="panel-body row content-canhan"></div>
+                <div class="panel-body row content-lichsumua"></div>
+                <div class="panel-body row content-chitietdaugia"></div>
+            </div>    
+        </div>
+        <div class="test"></div>
+        <!-- <div class="footer">
+            <p>Footer</p>
+        </div> -->
+    </div>
+
+    
+    <script src="/javascripts/jquery-3.1.1.min.js"></script>
+    <script src="/javascripts/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="/javascripts/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="/javascripts/tinymce/tinymce.min.js" ></script>
+    <script src="./javascripts/p5/p5.min.js"></script>
+    <script src="./javascripts/p5/p5.dom.min.js"></script>
+    <script src="./performajax/user-controller.js"></script>
+    
+</body>
+</html>
