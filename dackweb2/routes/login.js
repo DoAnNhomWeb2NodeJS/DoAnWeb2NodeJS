@@ -1,7 +1,7 @@
 var express = require('express')
 var path = require('path')
 var router = express.Router()
-var performQuery = require('../public/performajax/db')
+var performQuery = require('../public/javascripts/db')
 
 
 router.get('/', (req, res)=>{
