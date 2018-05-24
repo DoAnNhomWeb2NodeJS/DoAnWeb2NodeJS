@@ -2,7 +2,7 @@ var express = require('express')
 var path = require('path')
 var bodyParser = require('body-parser')
 var router = express.Router()
-var performQuery = require('../public/javascripts/db')
+var performQuery = require('../public/performajax/db')
 
 
 router.get('/', (req, res)=>{
@@ -18,13 +18,17 @@ router.post('/', (req, res)=>{
     if (req.session.tentaikhoan) {
         let query = 'SELECT * FROM taikhoan WHERE mataikhoan=$1'
         let values = [req.session.mataikhoan]
+        let ten
         performQuery(query, values, (results)=>{
-            let ten
             results.rows.forEach( e => {
                 ten = e.tenhienthi
             })
-            res.send( {tenhienthi: ten} )
-            res.end()
+            let query1 = 'SELECT * FROM sanpham'
+            let values1 = []
+            performQuery(query1, values1, (results1)=>{
+                res.send({tenhienthi: ten, sanpham: results1.rows})
+                res.end()
+            })
         })
     }
 })
@@ -97,10 +101,15 @@ router.get('/lichsumua', (req, res)=>{
     }
 })
 
-router.get('/chitietdaugia', (req, res)=>{
+router.get('/chitietdaugia/:masp', (req, res)=>{
     if (req.session.tentaikhoan) {
-        res.send( {chitiet: '1'} )
-        res.end()
+        let query = 'SELECT * FROM sanpham WHERE masanpham=$1'
+        let values = [req.params.masp]
+        console.log(req.params.masp)
+        performQuery(query, values, (results)=>{
+            res.send( {chitietdaugia: results.rows} )
+            // console.log(results.rows)
+        })
     }
 })
 

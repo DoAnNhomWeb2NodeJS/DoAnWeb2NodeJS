@@ -6,6 +6,7 @@ var app = express()
 
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'controller')));
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({ secret: 's e s s i o n', cookie: { maxAge: 24 * 60 * 60 * 1000 }}))
 
