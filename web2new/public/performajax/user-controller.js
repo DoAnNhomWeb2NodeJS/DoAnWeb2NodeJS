@@ -96,7 +96,7 @@ $(document).ready((e)=>{
                                     <div>
                                         <center>
                                             Giá hiện tại
-                                            <p class="pricenow-chitietdaugia">20.000.000 đ</p>
+                                            <p class="giahientai"></p>
                                         </center>    
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@ $(document).ready((e)=>{
                             </div>
                             <br>
                             <center>
-                                <button type="button" class="btn btn-danger btn-daugia-chitietdaugia">Đấu giá</button>
+                                <button type="button" class="btn btn-danger btndaugia">Đấu giá</button>
                             </center>
                         </div>
                     `)
@@ -136,13 +136,29 @@ $(document).ready((e)=>{
                 
                 $.ajax({
                     method: 'GET',
-                    url: '/user/chitietdaugia/'+masp,
+                    url: '/user/chitietdaugia/'+ masp,
                     contentType: 'application/json',
                     success: ((rs1)=>{
                         rs1.chitietdaugia.forEach((a1)=>{
                             $('.tensanpham').text(a1.tensanpham)
                             $('.dacta').html(a1.dacta)
                         })
+                        rs1.phiendaugia.forEach((a1)=>{
+                            if(a1.giahientai == null){
+                                $('.giahientai').text(a1.giathapnhat + " đ")    
+                            } else {
+                                $('.giahientai').text(a1.giahientai + " đ")
+                            }
+                        })
+                    })
+                })
+
+                //click đấu giá
+                $('.btndaugia').click((e)=>{
+                    $.ajax({
+                        method: 'PUT',
+                        url: '/daugia',
+                        
                     })
                 })
             })

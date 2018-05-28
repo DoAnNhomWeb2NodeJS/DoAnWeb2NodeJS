@@ -105,13 +105,23 @@ router.get('/chitietdaugia/:masp', (req, res)=>{
     if (req.session.tentaikhoan) {
         let query = 'SELECT * FROM sanpham WHERE masanpham=$1'
         let values = [req.params.masp]
-        console.log(req.params.masp)
+        // console.log(req.params.masp)
         performQuery(query, values, (results)=>{
-            res.send( {chitietdaugia: results.rows} )
-            // console.log(results.rows)
+            // res.send( {chitietdaugia: results.rows} )
+            let query1 = 'SELECT * FROM phiendaugia WHERE masanpham=$1'
+            performQuery(query1, values, (results1)=>{
+                res.send( {chitietdaugia: results.rows, phiendaugia: results1.rows} )
+                res.end()
+            })
         })
     }
 })
+
+// router.put('/daugia', (req, res)=>{
+//     if(req.session.tentaikhoan){
+
+//     }
+// })
 
 router.get('/logout', (req, res)=>{
     if (req.session.tentaikhoan) {
