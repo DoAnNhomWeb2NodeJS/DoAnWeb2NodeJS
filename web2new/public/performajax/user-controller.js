@@ -1,6 +1,6 @@
 //load sản phẩm khi vào trang chính
 $(document).ready((e)=>{
-
+    // e.preventDefault()
     $('.content-giohang').hide()
     $('.content-daugiacuatoi').hide()
     $('.content-canhan').hide()
@@ -16,6 +16,7 @@ $(document).ready((e)=>{
         $(".timer").html(counter+" giây");
         if(counter == 0){
             counter = failTime;
+            // console.log('successful')
         }else{
             counter--;
         }
@@ -44,7 +45,6 @@ $(document).ready((e)=>{
                             <div class="caption">
                                 <center>
                                     <p><b class="countdown-time-home timer"></b></p>
-                                    <p><b class="price-now-home">20.000 đ</b></p>
                                     <p><a href="" class="btn btn-danger btnchitietdaugia" role="button">Đấu giá ngay</a></p>
                                     <input type="hidden" class="masanpham" value="${a['masanpham']}">
                                 </center>
@@ -97,6 +97,8 @@ $(document).ready((e)=>{
                                         <center>
                                             Giá hiện tại
                                             <p class="giahientai"></p>
+                                            <input id="giahientai" type="text" value="" name="giahientai">
+                                            <input id="giathapnhat" type="hidden" value="" name="giathapnhat">
                                         </center>    
                                     </div>
                                 </div>
@@ -108,6 +110,7 @@ $(document).ready((e)=>{
                                         <p>
                                             Đấu giá ngay:
                                         </p>
+                                        <input id="maphiendau" type="hidden" value="" name="maphiendau">
                                         <input id="chongiadau" type="number" value="" name="chongiadau">
                                     </center>
                                 </div>
@@ -126,7 +129,6 @@ $(document).ready((e)=>{
                             initval: 0,
                             stepinterval: 50,
                             maxboostedstep: 10000000,
-                            // prefix: 'đ',
                             postfix: 'đ'
                         })   
                     })
@@ -144,10 +146,14 @@ $(document).ready((e)=>{
                             $('.dacta').html(a1.dacta)
                         })
                         rs1.phiendaugia.forEach((a1)=>{
+                            $('#maphiendau').val(a1.maphiendau)
+                            $('#giathapnhat').val(a1.giathapnhat)
                             if(a1.giahientai == null){
-                                $('.giahientai').text(a1.giathapnhat + " đ")    
+                                $('.giahientai').text(a1.giathapnhat + " đ")
+                                $('#giahientai').val(a1.giathapnhat) 
                             } else {
                                 $('.giahientai').text(a1.giahientai + " đ")
+                                $('#giahientai').val(a1.giahientai) 
                             }
                         })
                     })
@@ -155,14 +161,55 @@ $(document).ready((e)=>{
 
                 //click đấu giá
                 $('.btndaugia').click((e)=>{
+                    e.preventDefault()
+
+                    let row = $(e.target).parent().parent()
+                    let giadau = row.find('#chongiadau').val()
+                    let giahientai = row.find('#giahientai').val()
+
+                    if(giadau <= (parseInt(giahientai) + 5000)){
+                        giadau = parseInt(giahientai) + 5000
+                        alert('Bạn vừa đấu với giá: '+ giadau +'. Vì giá mới phải lớn hơn giá hiện tại 5000')
+                    } else {
+                        giadau = giadau
+                    }
+                    let maphiendau = row.find('#maphiendau').val()
+                    let today = new Date();
+                    let h = today.getHours();
+                    let m = today.getMinutes();
+                    let s = today.getSeconds();
+                    
                     $.ajax({
-                        method: 'PUT',
-                        url: '/daugia',
-                        
-                    })
+                        method: 'POST',
+                        url: 'user/daugia',
+                        contentType: 'application/json',
+                        data: JSON.stringify( {maphiendau: maphiendau, giadau: giadau, H: h, M: m, S: s} ),
+                        success: ((rs)=>{
+                            $('.giahientai').text(rs.daugia + " đ")
+                            $('#giahientai').val(rs.daugia)
+                            giahientainew = rs.daugia
+                            maphien = rs.maphien
+                            giathapnhat = $('#giathapnhat').val()
+                            alert('Đấu giá thành công')
+                        })
+                    })                  
                 })
+                
+                let checkTime = () => {
+                    if(counter == 0 && giahientai > giathapnhat){
+                        $.ajax({
+                            method: 'PUT',
+                            url: 'user/xulyphien',
+                            contentType: 'application/json',
+                            data: JSON.stringify( {gia: giahientainew, maphien: maphien} )
+                        })
+                        clearInterval(kt)
+                        alert('Phiên đấu này đã kết thúc')
+                    }
+                }
+                kt = setInterval(checkTime, 1000)  
             })
-        })    
+        })
     })
 })
 

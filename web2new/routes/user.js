@@ -104,11 +104,10 @@ router.get('/lichsumua', (req, res)=>{
 router.get('/chitietdaugia/:masp', (req, res)=>{
     if (req.session.tentaikhoan) {
         let query = 'SELECT * FROM sanpham WHERE masanpham=$1'
-        let values = [req.params.masp]
-        // console.log(req.params.masp)
+        let values = [req.params.masp]    
         performQuery(query, values, (results)=>{
-            // res.send( {chitietdaugia: results.rows} )
             let query1 = 'SELECT * FROM phiendaugia WHERE masanpham=$1'
+            // 'SELECT * FROM phieudaugia WHERE maphiendau=$1 and matinhtrangphieudaugia=$2'
             performQuery(query1, values, (results1)=>{
                 res.send( {chitietdaugia: results.rows, phiendaugia: results1.rows} )
                 res.end()
@@ -117,11 +116,42 @@ router.get('/chitietdaugia/:masp', (req, res)=>{
     }
 })
 
-// router.put('/daugia', (req, res)=>{
-//     if(req.session.tentaikhoan){
+router.post('/daugia', (req, res)=>{
+    if(req.session.tentaikhoan){
+        let query = 'UPDATE phieudaugia SET matinhtrangphieudaugia=$1 where matinhtrangphieudaugia=$2 and maphiendau=$3'
+        let values = ['0','1', req.body.maphiendau]
+        performQuery(query, values, (results)=>{
+            let query1 = 'INSERT INTO phieudaugia(maphieudaugia, mataikhoan, maphiendau, giadau, matinhtrangphieudaugia) VALUES($1,$2,$3,$4,$5)'
+            let mapd = req.body.H.toString(10) + req.body.M.toString(10) + req.body.S.toString(10) + req.session.mataikhoan
+            let values1 = [mapd, req.session.mataikhoan, req.body.maphiendau, parseInt(req.body.giadau), '1']
+            performQuery(query1, values1, (results1)=>{
+                let query2 = 'SELECT * FROM phieudaugia WHERE maphiendau=$1 and matinhtrangphieudaugia=$2'
+                let values2 = [req.body.maphiendau,'1']
+                performQuery(query2, values2, (results2)=>{
+                    let giadau
+                    results2.rows.forEach(e=>{
+                        giadau = e.giadau
+                    })
+                    res.send( {daugia: giadau, maphien: req.body.maphiendau} )
+                    res.end()
+                })
+            })
+        })
+    }
+})
 
-//     }
-// })
+router.put('/xulyphien', (req, res)=>{
+    if(req.session.tentaikhoan){
+        let query = 'SELECT * FROM phieudaugia WHERE matinhtrangphieudaugia=$1'
+        let values = ['1']
+        performQuery(query, values, (results)=>{
+            
+        })
+        // console.log(req.body.masanpham)
+        // console.log(req.body.maphien)
+        // console.log(req.body.gia)
+    }
+})
 
 router.get('/logout', (req, res)=>{
     if (req.session.tentaikhoan) {
